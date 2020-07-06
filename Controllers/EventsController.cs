@@ -21,7 +21,6 @@ namespace EventsAppApi.Controllers
         // GET: api/Events
         //[Authentication.BasicAuthentication]
         [HttpGet]
-        //[Authorize]
         //public IQueryable<Event> GetEvents(string Username, string token)
         //public IHttpActionResult GetEvents(string Username, string token)
         public IHttpActionResult GetEvents(string Username, string token)

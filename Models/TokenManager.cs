@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Web.Mvc;
 
 namespace EventsAppApi.Models
 {
@@ -83,8 +84,10 @@ namespace EventsAppApi.Models
         {
             SummitWorksEventManagerEntities db = new SummitWorksEventManagerEntities();
             int userid = Convert.ToInt32(User);
-            bool exists = db.Users.Find(userid) != null;
-            if (!exists)
+            User tempUser = db.Users.Find(userid);
+            if (tempUser == null)
+                return false;
+            if (!tempUser.IsAdmin)
                 return false;
             string tokenUsername = ValidateToken(token);
             if (!User.Equals(tokenUsername))
